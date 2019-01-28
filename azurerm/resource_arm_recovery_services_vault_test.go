@@ -29,7 +29,7 @@ func TestAccAzureRMRecoveryServicesVault_basic(t *testing.T) {
 					resource.TestCheckResourceAttrSet(resourceName, "location"),
 					resource.TestCheckResourceAttrSet(resourceName, "resource_group_name"),
 					resource.TestCheckResourceAttr(resourceName, "tags.%", "0"),
-					resource.TestCheckResourceAttr(resourceName, "sku", string(recoveryservices.Standard)),
+					resource.TestCheckResourceAttr(resourceName, "sku", "Standard"),
 				),
 			},
 			{
@@ -63,7 +63,7 @@ func TestAccAzureRMRecoveryServicesVault_requiresImport(t *testing.T) {
 					resource.TestCheckResourceAttrSet(resourceName, "location"),
 					resource.TestCheckResourceAttrSet(resourceName, "resource_group_name"),
 					resource.TestCheckResourceAttr(resourceName, "tags.%", "0"),
-					resource.TestCheckResourceAttr(resourceName, "sku", string(recoveryservices.Standard)),
+					resource.TestCheckResourceAttr(resourceName, "sku", "Standard"),
 				),
 			},
 			{
@@ -132,7 +132,7 @@ func testCheckAzureRMRecoveryServicesVaultExists(resourceName string) resource.T
 }
 
 func testAccAzureRMRecoveryServicesVault_basic(rInt int, location string) string {
-	return fmt.Sprintf(` 
+	return fmt.Sprintf(`
 resource "azurerm_resource_group" "test" {
   name     = "acctestRG-%d"
   location = "%s"
@@ -148,7 +148,7 @@ resource "azurerm_recovery_services_vault" "test" {
 }
 
 func testAccAzureRMRecoveryServicesVault_requiresImport(rInt int, location string) string {
-	return fmt.Sprintf(` 
+	return fmt.Sprintf(`
 %s
 
 resource "azurerm_recovery_services_vault" "import" {
